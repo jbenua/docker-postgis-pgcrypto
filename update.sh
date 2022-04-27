@@ -84,7 +84,7 @@ for version in "${versions[@]}"; do
     fi
     (
         set -x
-        cp -p Dockerfile.template initdb-postgis.sh update-postgis.sh README.md "$version/"
+        cp -p Dockerfile.template initdb-extensions.sh update-postgis.sh README.md "$version/"
         if [ "master" == "$postgisVersion" ]; then
           cp -p Dockerfile.master.template "$version/Dockerfile.template"
         fi
@@ -105,7 +105,7 @@ for version in "${versions[@]}"; do
         fi
         (
             set -x
-            cp -p Dockerfile.alpine.template initdb-postgis.sh update-postgis.sh "$version/$variant/"
+            cp -p Dockerfile.alpine.template initdb-extensions.sh update-postgis.sh "$version/$variant/"
             mv "$version/$variant/Dockerfile.alpine.template" "$version/$variant/Dockerfile"
             sed -i 's/%%PG_MAJOR%%/'"$postgresVersion"'/g; s/%%POSTGIS_VERSION%%/'"$srcVersion"'/g; s/%%POSTGIS_SHA256%%/'"$srcSha256"'/g' "$version/$variant/Dockerfile"
         )
